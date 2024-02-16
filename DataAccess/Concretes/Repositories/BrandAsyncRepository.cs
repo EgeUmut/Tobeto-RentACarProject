@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes.Repositories;
 
-public class BrandRepository : EfAsyncRepositoryBase<Brand, int, BaseDbContext>, IBrandRepository
+public class BrandAsyncRepository : EfAsyncRepositoryBase<Brand, int, BaseDbContext>, IBrandAsyncRepository
 {
-    public BrandRepository(BaseDbContext context) : base(context)
+    public BrandAsyncRepository(BaseDbContext context) : base(context)
     {
     }
 }

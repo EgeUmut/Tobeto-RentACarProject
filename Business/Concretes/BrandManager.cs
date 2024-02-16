@@ -13,9 +13,9 @@ namespace Business.Concretes;
 
 public class BrandManager : IBrandService
 {
-    private readonly IBrandRepository _brandRepository;
+    private readonly IBrandAsyncRepository _brandRepository;
 
-    public BrandManager(IBrandRepository brandRepository)
+    public BrandManager(IBrandAsyncRepository brandRepository)
     {
         _brandRepository = brandRepository;
     }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.DataAccess;
 
-public interface IAsyncRepository<TEntity,TEntityId>:IQuery<TEntity> where TEntity : BaseEntity<TEntityId>
+public interface IAsyncRepositoryBase<TEntity,TEntityId>:IQuery<TEntity> where TEntity : BaseEntity<TEntityId>
 {
     Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate = null,
         Func<IQueryable<TEntity>,IIncludableQueryable<TEntity,object>>? include = null);

@@ -21,7 +21,9 @@ public static class DataAccessServiceRegistration
 
 
         //Services and Managers Dependency Injections
-        services.AddScoped<IBrandRepository, BrandRepository>();    //Brand DI
+        services.AddScoped<IBrandAsyncRepository, BrandAsyncRepository>();    //Brand Async DI
+        services.AddScoped<IModelAsyncRepository, ModelAsyncRepository>();    //Model Async DI
+        services.AddScoped<ICarAsyncRepository, CarAsyncRepository>();    //Car Async DI
 
         return services;
     }

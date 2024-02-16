@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts;
 
-public interface ICarRepository: IAsyncRepository<Car,int>
+public interface IModelAsyncRepository:IAsyncRepositoryBase<Model,int>
 {
 }
