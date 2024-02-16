@@ -25,10 +25,19 @@ public class EfAsyncRepositoryBase<TEntity, TEntityId, TContext> : IAsyncReposit
 
     public async Task<TEntity> Add(TEntity entity)
     {
-        entity.CreatedDate = DateTime.UtcNow;
-        await _context.AddAsync(entity);
-        await _context.SaveChangesAsync();
-        return entity;
+        try
+        {
+            entity.CreatedDate = DateTime.UtcNow;
+            await _context.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+        catch (Exception e)
+        {
+
+            throw e;
+        }
+
     }
 
     public async Task<TEntity> Delete(TEntity entity)

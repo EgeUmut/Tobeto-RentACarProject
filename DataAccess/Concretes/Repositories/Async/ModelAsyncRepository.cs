@@ -1,5 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
-using DataAccess.Abstracts;
+using DataAccess.Abstracts.Async;
 using DataAccess.Concretes.EntityFramework.Context;
 using Entities.Concretes;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concretes.Repositories;
+namespace DataAccess.Concretes.Repositories.Async;
 
 public class ModelAsyncRepository : EfAsyncRepositoryBase<Model, int, BaseDbContext>, IModelAsyncRepository
 {

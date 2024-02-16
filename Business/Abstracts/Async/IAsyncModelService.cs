@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Abstracts;
+namespace Business.Abstracts.Async;
 
-public interface IBrandService
+public interface IAsyncModelService
 {
-    Task<CreateBrandResponse> AddAsync(CreateBrandRequest request);
-    Task<List<Brand>> GetAll();
+    //Async Methods
+    Task<CreateModelResponse> AddAsync(CreateModelRequest request);
+    Task<List<Model>> GetAll();
 }

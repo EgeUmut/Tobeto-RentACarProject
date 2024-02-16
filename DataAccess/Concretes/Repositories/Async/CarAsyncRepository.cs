@@ -1,6 +1,6 @@
 ﻿using Core.DataAccess;
 using Core.DataAccess.EntityFramework;
-using DataAccess.Abstracts;
+using DataAccess.Abstracts.Async;
 using DataAccess.Concretes.EntityFramework.Context;
 using Entities.Concretes;
 using Microsoft.EntityFrameworkCore.Query;
@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concretes.Repositories;
+namespace DataAccess.Concretes.Repositories.Async;
 
 public class CarAsyncRepository : EfAsyncRepositoryBase<Car, int, BaseDbContext>, ICarAsyncRepository
 {

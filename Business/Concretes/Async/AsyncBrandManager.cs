@@ -1,7 +1,9 @@
-﻿using Business.Abstracts;
+﻿using Business.Abstracts.Async;
+using Business.Abstracts.Sync;
 using Business.Requests;
 using Business.Responses;
-using DataAccess.Abstracts;
+using DataAccess.Abstracts.Async;
+using DataAccess.Abstracts.Sync;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -9,22 +11,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Concretes;
+namespace Business.Concretes.Async;
 
-public class BrandManager : IBrandService
+public class AsyncBrandManager : IAsyncBrandService
 {
-    private readonly IBrandAsyncRepository _brandRepository;
+    private readonly IBrandAsyncRepository _brandAsyncRepository;
 
-    public BrandManager(IBrandAsyncRepository brandRepository)
+    public AsyncBrandManager(IBrandAsyncRepository brandAsyncRepository)
     {
-        _brandRepository = brandRepository;
+        _brandAsyncRepository = brandAsyncRepository;
     }
 
     public async Task<CreateBrandResponse> AddAsync(CreateBrandRequest request)
     {
         Brand brand = new Brand();
         brand.Name = request.Name;
-        await _brandRepository.Add(brand);
+        await _brandAsyncRepository.Add(brand);
 
         CreateBrandResponse response = new CreateBrandResponse();
         response.Name = brand.Name;
@@ -34,6 +36,8 @@ public class BrandManager : IBrandService
 
     public async Task<List<Brand>> GetAll()
     {
-        return await _brandRepository.GetAll();
+        return await _brandAsyncRepository.GetAll();
     }
+
+
 }

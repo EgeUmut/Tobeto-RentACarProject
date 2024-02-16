@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Abstracts;
+namespace DataAccess.Abstracts.Async;
 
-public interface ICarAsyncRepository: IAsyncRepositoryBase<Car,int>
+public interface IBrandAsyncRepository : IAsyncRepositoryBase<Brand, int>
 {
+
 }

@@ -1,5 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
-using DataAccess.Abstracts;
+using DataAccess.Abstracts.Sync;
 using DataAccess.Concretes.EntityFramework.Context;
 using Entities.Concretes;
 using System;
@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concretes.Repositories;
+namespace DataAccess.Concretes.Repositories.Sync;
 
-public class BrandAsyncRepository : EfAsyncRepositoryBase<Brand, int, BaseDbContext>, IBrandAsyncRepository
+public class BrandRepository : EfRepositoryBase<Brand, int, BaseDbContext>, IBrandRepository
 {
-    public BrandAsyncRepository(BaseDbContext context) : base(context)
+    public BrandRepository(BaseDbContext context) : base(context)
     {
     }
 }
