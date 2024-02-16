@@ -1,7 +1,7 @@
 using DataAccess.Concretes.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
-
+using Business;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,8 +15,9 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddDbContext<BaseDbContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//SQL Database Configuration New
+//SQL Database Configuration --- Service Injections
 builder.Services.AddDataAccessServices(builder.Configuration);
+builder.Services.AddBusinessServices();
 
 
 var app = builder.Build();

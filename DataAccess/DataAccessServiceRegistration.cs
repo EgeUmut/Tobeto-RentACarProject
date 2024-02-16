@@ -1,4 +1,6 @@
-﻿using DataAccess.Concretes.EntityFramework.Context;
+﻿using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework.Context;
+using DataAccess.Concretes.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,10 @@ public static class DataAccessServiceRegistration
     {
         services.AddDbContext<BaseDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+
+        //Services and Managers Dependency Injections
+        services.AddScoped<IBrandRepository, BrandRepository>();    //Brand DI
 
         return services;
     }

@@ -21,8 +21,8 @@ public class CarConfigurations : IEntityTypeConfiguration<Car>
         builder.Property(p => p.DailyPrice).HasColumnName("DailyPrice");
         builder.Property(p => p.Plate).HasColumnName("Plate");
         builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
-        builder.Property(p => p.DeletedTime).HasColumnName("DeletedDate");
-        builder.Property(p => p.UpdatedTime).HasColumnName("UpdatedDate");
+        builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(p => p.DeleteStatus).HasColumnName("DeleteStatus");
 
 

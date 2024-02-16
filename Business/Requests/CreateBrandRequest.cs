@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.DataAccess;
+namespace Business.Requests;
 
-public class EfRepositoryBase
+public class CreateBrandRequest
 {
-
+    public string Name { get; set; }
 }

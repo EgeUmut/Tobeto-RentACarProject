@@ -19,8 +19,8 @@ public class ModelConfigurations : IEntityTypeConfiguration<Model>
         builder.Property(p => p.BrandId).HasColumnName("BrandId");
         builder.Property(p => p.Name).HasColumnName("name");
         builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
-        builder.Property(p => p.DeletedTime).HasColumnName("DeletedDate");
-        builder.Property(p => p.UpdatedTime).HasColumnName("UpdatedDate");
+        builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(p => p.DeleteStatus).HasColumnName("DeleteStatus");
 
         builder.HasOne(p => p.Brand);
