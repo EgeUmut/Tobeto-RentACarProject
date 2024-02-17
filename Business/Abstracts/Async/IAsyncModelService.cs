@@ -13,5 +13,5 @@ public interface IAsyncModelService
 {
     //Async Methods
     Task<CreateModelResponse> AddAsync(CreateModelRequest request);
-    Task<List<Model>> GetAll();
+    Task<List<GetAllModelResponse>> GetAll();
 }

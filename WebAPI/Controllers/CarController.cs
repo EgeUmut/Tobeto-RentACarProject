@@ -32,6 +32,18 @@ namespace WebAPI.Controllers
             return Ok(await _asyncCarService.GetAll());
         }
 
+        [HttpPost("Add")]
+        public CreateCarResponse Add(CreateCarRequest request)
+        {
+            return _carService.Add(request);
+        }
+
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+            return Ok(_carService.GetAll());
+        }
+
         [HttpPost("GetById")]
         public GetByIdCarResponse GetById(int id)
         {

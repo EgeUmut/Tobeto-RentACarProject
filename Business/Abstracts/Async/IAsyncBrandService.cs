@@ -13,5 +13,5 @@ public interface IAsyncBrandService
 {
     //Async Methods
     Task<CreateBrandResponse> AddAsync(CreateBrandRequest request);
-    Task<List<Brand>> GetAll();
+    Task<List<GetAllBrandResponse>> GetAll();
 }

@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
             _modelService = modelService;
             _asyncModelService = asyncModelService;
         }
-
+        
         [HttpPost("AddAsync")]
         public async Task<CreateModelResponse> AddAsync(CreateModelRequest request)
         {
@@ -30,6 +30,18 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> getAllAsync()
         {
             return Ok(await _asyncModelService.GetAll());
+        }
+
+        [HttpPost("Add")]
+        public CreateModelResponse Add(CreateModelRequest request)
+        {
+            return _modelService.Add(request);
+        }
+
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+            return Ok(_modelService.GetAll());
         }
 
         [HttpPost("GetById")]

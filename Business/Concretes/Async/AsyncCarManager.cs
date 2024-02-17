@@ -41,8 +41,24 @@ public class AsyncCarManager : IAsyncCarService
         return response;
     }
 
-    public async Task<List<Car>> GetAll()
+    public async Task<List<GetAllCarResponse>> GetAll()
     {
-        return await _carAsyncRepository.GetAll();
+        var list = await _carAsyncRepository.GetAll();
+        
+        List<GetAllCarResponse> responseList = new List<GetAllCarResponse>();
+
+        foreach (var item in list)
+        {
+            GetAllCarResponse response = new GetAllCarResponse();
+            response.Id = item.Id;
+            response.ModelYear = item.ModelYear;
+            response.DailyPrice = item.DailyPrice;
+            response.State = item.State;
+            response.CreatedDate = item.CreatedDate;
+            response.UpdatedDate = item.UpdatedDate;
+            responseList.Add(response);
+        }
+
+        return responseList;
     }
 }

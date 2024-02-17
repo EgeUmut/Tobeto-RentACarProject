@@ -13,5 +13,5 @@ public interface IAsyncCarService
 {
     //Async Methods
     Task<CreateCarResponse> AddAsync(CreateCarRequest request);
-    Task<List<Car>> GetAll();
+    Task<List<GetAllCarResponse>> GetAll();
 }

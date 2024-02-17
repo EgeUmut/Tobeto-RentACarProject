@@ -13,5 +13,7 @@ public interface IModelService
 {
 
     //Sync Methods
+    CreateModelResponse Add(CreateModelRequest request);
+    List<GetAllModelResponse> GetAll();
     GetByIdModelResponse GetById(int id);
 }

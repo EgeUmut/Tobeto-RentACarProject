@@ -4,6 +4,7 @@ using Business.Requests;
 using Business.Responses;
 using DataAccess.Abstracts.Async;
 using DataAccess.Abstracts.Sync;
+using DataAccess.Concretes.Repositories.Async;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,22 @@ public class AsyncModelManager : IAsyncModelService
         return response;
     }
 
-    public async Task<List<Model>> GetAll()
+    public async Task<List<GetAllModelResponse>> GetAll()
     {
-        return await _modelAsyncRepository.GetAll();
+        var list = await _modelAsyncRepository.GetAll();
+        
+        List<GetAllModelResponse> responseList = new List<GetAllModelResponse>();
+
+        foreach (var item in list)
+        {
+            GetAllModelResponse response = new GetAllModelResponse();
+            response.Id = item.Id;
+            response.Name = item.Name;
+            response.CreatedDate = item.CreatedDate;
+            response.UpdatedDate = item.UpdatedDate;
+            responseList.Add(response);
+        }
+
+        return responseList;
     }
 }

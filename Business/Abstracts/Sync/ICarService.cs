@@ -13,5 +13,8 @@ public interface ICarService
 {
 
     //Sync Methods
+    CreateCarResponse Add(CreateCarRequest request);
+    List<GetAllCarResponse> GetAll();
     GetByIdCarResponse GetById(int id);
+
 }

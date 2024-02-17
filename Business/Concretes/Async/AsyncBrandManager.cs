@@ -34,9 +34,23 @@ public class AsyncBrandManager : IAsyncBrandService
         return response;
     }
 
-    public async Task<List<Brand>> GetAll()
+    public async Task<List<GetAllBrandResponse>> GetAll()
     {
-        return await _brandAsyncRepository.GetAll();
+        var list = await _brandAsyncRepository.GetAll();
+        
+        List<GetAllBrandResponse> responseList = new List<GetAllBrandResponse>();
+
+        foreach (var item in list)
+        {
+            GetAllBrandResponse response = new GetAllBrandResponse();
+            response.Id = item.Id;
+            response.Name = item.Name;
+            response.CreatedDate = item.CreatedDate;
+            response.UpdatedDate = item.UpdatedDate;
+            responseList.Add(response);
+        }
+
+        return responseList;
     }
 
 
