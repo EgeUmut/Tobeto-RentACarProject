@@ -1,7 +1,6 @@
-﻿using Business.Abstracts.Async;
-using Business.Abstracts.Sync;
+﻿using Business.Abstracts;
 using Business.Requests;
-using Business.Responses;
+using Business.Responses.Car;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,24 +11,23 @@ namespace WebAPI.Controllers
     public class CarController : ControllerBase
     {
         private readonly ICarService _carService;
-        private readonly IAsyncCarService _asyncCarService;
 
-        public CarController(ICarService carService, IAsyncCarService asyncCarService)
+        public CarController(ICarService carService)
         {
             _carService = carService;
-            _asyncCarService = asyncCarService;
+
         }
 
         [HttpPost("AddAsync")]
         public async Task<CreateCarResponse> AddAsync(CreateCarRequest request)
         {
-            return await _asyncCarService.AddAsync(request);
+            return await _carService.AddAsync(request);
         }
 
         [HttpGet("GetAllAsync")]
         public async Task<IActionResult> getAllAsync()
         {
-            return Ok(await _asyncCarService.GetAll());
+            return Ok(await _carService.GetAllAsync());
         }
 
         [HttpPost("Add")]

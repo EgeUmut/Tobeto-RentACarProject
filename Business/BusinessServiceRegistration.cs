@@ -1,11 +1,10 @@
-﻿using Business.Abstracts.Async;
-using Business.Abstracts.Sync;
-using Business.Concretes.Async;
-using Business.Concretes.Sync;
+﻿using Business.Abstracts;
+using Business.Concretes;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,10 +14,7 @@ public static class BusinessServiceRegistration
 {
     public static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
-        //Async Services
-        services.AddScoped<IAsyncBrandService, AsyncBrandManager>();
-        services.AddScoped<IAsyncCarService, AsyncCarManager>();
-        services.AddScoped<IAsyncModelService, AsyncModelManager>();
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());    //Automapper
 
         //Sync Services
         services.AddScoped<IBrandService, BrandManager>();

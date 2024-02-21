@@ -1,7 +1,6 @@
-﻿using Business.Abstracts.Async;
-using Business.Abstracts.Sync;
+﻿using Business.Abstracts;
 using Business.Requests;
-using Business.Responses;
+using Business.Responses.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,24 +11,23 @@ namespace WebAPI.Controllers
     public class ModelController : ControllerBase
     {
         private readonly IModelService _modelService;
-        private readonly IAsyncModelService _asyncModelService;
 
-        public ModelController(IModelService modelService, IAsyncModelService asyncModelService)
+        public ModelController(IModelService modelService)
         {
             _modelService = modelService;
-            _asyncModelService = asyncModelService;
+
         }
         
         [HttpPost("AddAsync")]
         public async Task<CreateModelResponse> AddAsync(CreateModelRequest request)
         {
-            return await _asyncModelService.AddAsync(request);
+            return await _modelService.AddAsync(request);
         }
 
         [HttpGet("GetAllAsync")]
         public async Task<IActionResult> getAllAsync()
         {
-            return Ok(await _asyncModelService.GetAll());
+            return Ok(await _modelService.GetAllAsync());
         }
 
         [HttpPost("Add")]

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Requests;
+namespace Business.Responses.Model;
 
-public class CreateModelRequest
+public class CreateModelResponse
 {
     public string Name { get; set; }
     public int? BrandId { get; set; }
+    public DateTime? CreatedDate { get; set; }
+
 }

@@ -1,7 +1,6 @@
-﻿using Business.Abstracts.Async;
-using Business.Abstracts.Sync;
+﻿using Business.Abstracts;
 using Business.Requests;
-using Business.Responses;
+using Business.Responses.Brand;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,24 +11,22 @@ namespace WebAPI.Controllers
     public class BrandController : ControllerBase
     {
         private readonly IBrandService _brandService;
-        private readonly IAsyncBrandService _asyncBrandService;
 
-        public BrandController(IBrandService brandService, IAsyncBrandService asyncBrandService)
+        public BrandController(IBrandService brandService)
         {
             _brandService = brandService;
-            _asyncBrandService = asyncBrandService;
         }
 
         [HttpPost("AddAsync")]
         public async Task<CreateBrandResponse> AddAsync(CreateBrandRequest request)
         {
-            return await _asyncBrandService.AddAsync(request);
+            return await _brandService.AddAsync(request);
         }
 
         [HttpGet("GetAllAsync")]
         public async Task<IActionResult> getAllAsync()
         {
-            return Ok(await _asyncBrandService.GetAll());
+            return Ok(await _brandService.GetAllAsync());
         }
 
         [HttpPost("Add")]
