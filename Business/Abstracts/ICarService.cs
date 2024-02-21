@@ -1,5 +1,6 @@
 ﻿using Business.Requests;
 using Business.Responses.Car;
+using Core.Utilities.Results;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,6 @@ public interface ICarService
 
     //ASYNC
     Task<CreateCarResponse> AddAsync(CreateCarRequest request);
-    Task<List<GetAllCarResponse>> GetAllAsync();
+    Task<IDataResult<List<GetAllCarResponse>>> GetAllAsync();
 
 }
