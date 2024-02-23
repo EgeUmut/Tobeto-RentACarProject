@@ -1,5 +1,6 @@
 ﻿using Business.Requests;
 using Business.Responses.Brand;
+using Core.Utilities.Results;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,6 @@ public interface IBrandService
     GetByIdBrandResponse GetById(int id);
 
     //ASYNC
-    Task<CreateBrandResponse> AddAsync(CreateBrandRequest request);
-    Task<List<GetAllBrandResponse>> GetAllAsync();
+    Task<IDataResult<CreateBrandResponse>> AddAsync(CreateBrandRequest request);
+    Task<IDataResult<List<GetAllBrandResponse>>> GetAllAsync();
 }

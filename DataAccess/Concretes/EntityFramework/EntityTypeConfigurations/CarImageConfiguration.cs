@@ -9,24 +9,19 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes.EntityFramework.EntityTypeConfigurations;
 
-public class CarConfigurations : IEntityTypeConfiguration<Car>
+public class CarImageConfiguration : IEntityTypeConfiguration<CarImage>
 {
-    public void Configure(EntityTypeBuilder<Car> builder)
+    public void Configure(EntityTypeBuilder<CarImage> builder)
     {
-        builder.ToTable("Cars").HasKey(p => p.Id);
+        builder.ToTable("CarImages").HasKey(p => p.Id);
         builder.Property(p => p.Id).HasColumnName("id");
-        builder.Property(p => p.ModelId).HasColumnName("ModelId");
-        builder.Property(p => p.ModelYear).HasColumnName("ModelYear");
-        builder.Property(p => p.State).HasColumnName("State");
-        builder.Property(p => p.DailyPrice).HasColumnName("DailyPrice");
-        builder.Property(p => p.Plate).HasColumnName("Plate");
+        builder.Property(p => p.CarId).HasColumnName("CarId");
+        builder.Property(p => p.ImagePath).HasColumnName("ImagePath");
         builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
         builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
         builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(p => p.DeleteStatus).HasColumnName("DeleteStatus");
 
-
-        builder.HasOne(p => p.Model);
-        builder.HasMany(p => p.CarImages);
+        builder.HasOne(p => p.Car);
     }
 }

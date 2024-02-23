@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : ControllerBase
+    public class BrandController : BaseController
     {
         private readonly IBrandService _brandService;
 
@@ -18,15 +18,17 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("AddAsync")]
-        public async Task<CreateBrandResponse> AddAsync(CreateBrandRequest request)
+        public async Task<IActionResult> AddAsync(CreateBrandRequest request)
         {
-            return await _brandService.AddAsync(request);
+            var item = await _brandService.AddAsync(request);
+            return HandleDataResult(item);
         }
 
         [HttpGet("GetAllAsync")]
         public async Task<IActionResult> getAllAsync()
         {
-            return Ok(await _brandService.GetAllAsync());
+            var item = await _brandService.GetAllAsync();
+            return HandleDataResult(item);
         }
 
         [HttpPost("Add")]

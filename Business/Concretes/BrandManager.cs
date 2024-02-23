@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Azure;
 using Business.Abstracts;
 using Business.Requests;
 using Business.Responses.Brand;
+using Core.Utilities.Results;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using System;
@@ -43,19 +45,6 @@ public class BrandManager : IBrandService
 
     public GetByIdBrandResponse GetById(int id)
     {
-        /*   var item = _brandRepository.Get(p => p.Id == id);
-           GetByIdBrandResponse response = new GetByIdBrandResponse();
-           if (item != null)
-           {
-               response.Id = item.Id;
-               response.Name = item.Name;
-               response.CreatedDate = item.CreatedDate;
-               response.UpdatedDate = item.UpdatedDate;
-               return response;
-           }
-
-           return response;*/
-
         var item = _brandRepository.Get(p => p.Id == id);
         if (item != null)
         {
@@ -65,34 +54,20 @@ public class BrandManager : IBrandService
         return null;
     }
 
-    public async Task<CreateBrandResponse> AddAsync(CreateBrandRequest request)
+    public async Task<IDataResult<CreateBrandResponse>> AddAsync(CreateBrandRequest request)
     {
-        Brand brand = new Brand();
-        brand.Name = request.Name;
+        Brand brand = _mapper.Map<Brand>(request);
         await _brandRepository.AddAsync(brand);
+        CreateBrandResponse response = _mapper.Map<CreateBrandResponse>(brand);
 
-        CreateBrandResponse response = new CreateBrandResponse();
-        response.Name = brand.Name;
-        response.CreatedDate = brand.CreatedDate;
-        return response;
+        return new SuccessDataResult<CreateBrandResponse>(response,"Added Succesfully");
     }
 
-    public async Task<List<GetAllBrandResponse>> GetAllAsync()
+    public async Task<IDataResult<List<GetAllBrandResponse>>> GetAllAsync()
     {
         var list = await _brandRepository.GetAllAsync();
+        List<GetAllBrandResponse> responseList = _mapper.Map<List<GetAllBrandResponse>>(list);
 
-        List<GetAllBrandResponse> responseList = new List<GetAllBrandResponse>();
-
-        foreach (var item in list)
-        {
-            GetAllBrandResponse response = new GetAllBrandResponse();
-            response.Id = item.Id;
-            response.Name = item.Name;
-            response.CreatedDate = item.CreatedDate;
-            response.UpdatedDate = item.UpdatedDate;
-            responseList.Add(response);
-        }
-
-        return responseList;
+        return new SuccessDataResult<List<GetAllBrandResponse>>(responseList, "listed Succesfully");
     }
 }

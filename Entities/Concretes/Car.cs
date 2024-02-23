@@ -11,7 +11,7 @@ public class Car:BaseEntity<int>
 {
     public Car()
     {
-        
+        CarImages = new HashSet<CarImage>();
     }
 
     public Car(int modelId, int modelYear, string plate, int state, double dailyPrice):this()
@@ -28,5 +28,6 @@ public class Car:BaseEntity<int>
     public string Plate { get; set; }
     public int State { get; set; }
     public double DailyPrice { get; set; }
+    public ICollection<CarImage> CarImages { get; set; }
     public Model? Model { get; set; }
 }
