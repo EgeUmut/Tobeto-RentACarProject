@@ -61,7 +61,7 @@ public class FileHelper
         catch (Exception e)
         {
 
-            return new ErrorDataResult<string>("File Couldn't deleted. Exception: " + e);
+            return new ErrorDataResult<string>("File Couldn't be deleted. Exception: " + e.Message);
         }
     }
 

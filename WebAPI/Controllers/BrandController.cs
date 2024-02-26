@@ -48,5 +48,17 @@ namespace WebAPI.Controllers
         {
             return _brandService.GetById(id);
         }
+
+        [HttpDelete("DeleteAsync")]
+        public async Task<IActionResult> DeleteAsync(int request)
+        {
+            return HandleResult(await _brandService.DeleteAsync(request));
+        }
+
+        [HttpDelete("SoftDeleteAsync")]
+        public async Task<IActionResult> SoftDeleteAsync(int request)
+        {
+            return HandleResult(await _brandService.SoftDeleteAsync(request));
+        }
     }
 }

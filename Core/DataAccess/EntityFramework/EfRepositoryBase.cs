@@ -39,8 +39,18 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IRepositoryBase<TE
         return entity;
     }
 
+    public TEntity SoftDelete(TEntity entity)
+    {
+        entity.DeletedDate = DateTime.UtcNow;
+        entity.DeleteStatus = true;
+        _context.Update(entity);
+        _context.SaveChanges();
+        return entity;
+    }
+
     public TEntity Get(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
     {
+        //IQueryable<TEntity> queryable = Query().Where(e => e.DeleteStatus != true); // Soft silinmiş verileri hariç tut
         IQueryable<TEntity> queryable = Query();
         if (include != null)
             queryable = include(queryable);
@@ -49,6 +59,7 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IRepositoryBase<TE
 
     public List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
     {
+        //IQueryable<TEntity> queryable = Query().Where(e => e.DeleteStatus != true); // Soft silinmiş verileri hariç tut
         IQueryable<TEntity> queryable = Query();
         if (include != null)
             queryable = include(queryable);
@@ -69,25 +80,25 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IRepositoryBase<TE
 
     public async Task<TEntity> AddAsync(TEntity entity)
     {
-        try
-        {
             entity.CreatedDate = DateTime.UtcNow;
             await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
-        }
-        catch (Exception e)
-        {
-
-            throw e;
-        }
-
     }
 
     public async Task<TEntity> DeleteAsync(TEntity entity)
     {
         entity.DeletedDate = DateTime.UtcNow;
         _context.Remove(entity);
+        await _context.SaveChangesAsync();
+        return entity;
+    }
+
+    public async Task<TEntity> SoftDeleteAsync(TEntity entity)
+    {
+        entity.DeletedDate = DateTime.UtcNow;
+        entity.DeleteStatus = true;
+        _context.Update(entity);
         await _context.SaveChangesAsync();
         return entity;
     }

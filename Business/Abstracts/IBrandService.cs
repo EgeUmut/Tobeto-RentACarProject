@@ -20,4 +20,6 @@ public interface IBrandService
     //ASYNC
     Task<IDataResult<CreateBrandResponse>> AddAsync(CreateBrandRequest request);
     Task<IDataResult<List<GetAllBrandResponse>>> GetAllAsync();
+    Task<IResult> DeleteAsync(int request);
+    Task<IResult> SoftDeleteAsync(int request);
 }
