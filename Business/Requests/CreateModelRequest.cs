@@ -9,5 +9,5 @@ namespace Business.Requests;
 public class CreateModelRequest
 {
     public string Name { get; set; }
-    public int? BrandId { get; set; }
+    public int BrandId { get; set; }
 }
