@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using Business;
 using Core.Exceptios.Extensions;
+using Autofac;
+using Business.DependencyResolves.Autofac;
+using Autofac.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,6 +23,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDataAccessServices(builder.Configuration);
 builder.Services.AddBusinessServices();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+//builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+//             {
+//                 builder.RegisterModule(new AutofacBusinessModule());
+//             });
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
+{
+    builder.RegisterModule(new AutofacBusinessModule());
+});
 
 var app = builder.Build();
 
@@ -28,7 +40,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    //app.ConfigureCustomExceptionMiddleWare();
+    app.ConfigureCustomExceptionMiddleWare();
 }
 
 if (app.Environment.IsProduction())

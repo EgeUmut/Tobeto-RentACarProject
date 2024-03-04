@@ -5,11 +5,15 @@ using Business.Constants;
 using Business.Requests;
 using Business.Responses.Brand;
 using Business.Rules;
+using Core.Aspects.Autofac.Logging;
+using Core.CrossCuttingConcerns.Logging.SeriLog.Loggers;
 using Core.Exceptios.Types;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +27,14 @@ public class BrandManager : IBrandService
     private readonly IBrandRepository _brandRepository;
     private readonly IMapper _mapper;
     private readonly BrandBusinessRules _brandBusinessRules;
+    private readonly IConfiguration _configuration;
 
-    public BrandManager(IBrandRepository brandRepository, IMapper mapper, BrandBusinessRules brandBusinessRules)
+    public BrandManager(IBrandRepository brandRepository, IMapper mapper, BrandBusinessRules brandBusinessRules, IConfiguration configuration)
     {
         _brandRepository = brandRepository;
         _mapper = mapper;
         _brandBusinessRules = brandBusinessRules;
+        _configuration = configuration;
     }
 
     //Sync
@@ -61,7 +67,7 @@ public class BrandManager : IBrandService
         }
         return null;
     }
-
+    [LogAspect(typeof(MssqlLogger))]
     public async Task<IDataResult<CreateBrandResponse>> AddAsync(CreateBrandRequest request)
     {
         await _brandBusinessRules.CheckIfBrandNameNotExist(request.Name);
