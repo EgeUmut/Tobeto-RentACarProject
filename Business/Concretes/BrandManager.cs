@@ -67,7 +67,7 @@ public class BrandManager : IBrandService
         }
         return null;
     }
-    [LogAspect(typeof(MongoDbLogger))]
+    [LogAspect(typeof(MssqlLogger))]
     public async Task<IDataResult<CreateBrandResponse>> AddAsync(CreateBrandRequest request)
     {
         await _brandBusinessRules.CheckIfBrandNameNotExist(request.Name);

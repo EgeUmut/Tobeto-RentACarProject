@@ -6,6 +6,9 @@ using Core.Exceptios.Extensions;
 using Autofac;
 using Business.DependencyResolves.Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Core.Utilities.IoC;
+using Core.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,18 +25,17 @@ builder.Services.AddSwaggerGen();
 //SQL Database Configuration --- Service Injections
 builder.Services.AddDataAccessServices(builder.Configuration);
 builder.Services.AddBusinessServices();
+builder.Services.AddCoreModule();
 
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-//builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
-//             {
-//                 builder.RegisterModule(new AutofacBusinessModule());
-//             });
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterModule(new AutofacBusinessModule());
 });
 
 var app = builder.Build();
+ServiceTool.ServiceProvider = app.Services;
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
