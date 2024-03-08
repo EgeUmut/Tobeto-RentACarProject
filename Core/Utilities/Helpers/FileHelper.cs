@@ -55,7 +55,8 @@ public class FileHelper
     {
         try
         {
-            File.Delete(path);
+            //File.Delete(path);
+            File.Delete(@$"wwwroot" + path);
             return new SuccessDataResult<string>("Successfully deleted file");
         }
         catch (Exception e)
